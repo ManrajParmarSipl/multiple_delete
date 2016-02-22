@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+	<div ng-app="myApp" ng-controller="myCtrl">
+     <div ng-controller="myCtrl">
+		<table  border="1">
+			<tr>
+			    <th>Select</th>
+				<th>Id</th>
+				<th>Name</th>
+			</tr>
+			<tr ng-repeat="user in users">
+			<td><input type="checkbox" ng-click="toggleSelection(user.id)" /></td>
+			<td><span ng-bind="user.id"></span></td>
+            <td><span ng-bind="user.name"></span></td>
+
+			</tr>
+		</table>
+        <a ng-click="delete()" >Delete</a>
+		<br>
+	</div>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+			$scope.users = [{id:1,name:'name1'},
+			                {id:2,name:'name2'},
+			                {id:3,name:'name3'},
+			                {id:4,name:'name4'},
+			                {id:5,name:'name5'},
+			                {id:6,name:'name6'}];
+			$scope.selection = [];
+			$scope.toggleSelection = function toggleSelection(id) {
+            var idx = $scope.selection.indexOf(id);
+            if (idx > -1) {
+                $scope.selection.splice(idx, 1);
+            }
+            else {
+                $scope.selection.push(id);
+            }
+        };
+        
+        $scope.delete = function(){
+        	alert($scope.selection);
+        	console.log($scope.selection);
+        }
+      
+
+		});
+	</script>
+
+</body>
+</html>
